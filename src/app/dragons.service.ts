@@ -21,18 +21,19 @@ export class DragonsService {
 
   constructor(private http: HttpClient) { }
 
-  private dragons: Dragon[] = DRAGONS;
+
 
   private dragonUrl = "https://knight-dragons-default-rtdb.firebaseio.com/dragons";
 
   getDragon(): Observable<Dragon[]> {
-    console.log("dragons: ", this.dragons);
     return this.http.get<Dragon[]>(this.dragonUrl + "/.json").pipe(
-      map(a => { console.log("a:", a); return a })
+      map(dragons => Object.values(dragons)),
+      map(a => { console.log("dragons:", a); return a })
+
     )
   }
 
-  addDragon(dragon: Dragon): Observable<any>{
+  addDragon(dragon: Dragon): Observable<any> {
     return this.http.post<Dragon>(`${this.dragonUrl}/.json`, dragon)
   }
 

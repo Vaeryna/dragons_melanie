@@ -1,16 +1,18 @@
-<button routerLink="/addDragon" class="btn btn-dark">
-  Add a dragon
-</button>
+<p>
+  <button routerLink="/addDragon" class="btn btn-secondary">
+    Add a dragon
+  </button>
+</p>
 
-<table class="table table-hover table-dark">
+<table class="table table-hover table-dark" >
   <thead>
     <tr>
-      <th scope="col">Name</th>
+      <th scope="col" style="text-align: center">Name</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let dragon of dragons">
 
+    <tr scope="row" *ngFor="let dragon of dragons">
       <td>
         {{ dragon.name }}
       </td>

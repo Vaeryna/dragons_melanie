@@ -31,9 +31,9 @@ export class AddDragonComponent implements OnInit {
     const dragon = this.dragonForm.value;
 
     this.dS.addDragon(dragon).subscribe(
-      resultat => {
-        console.log(resultat);
-        this.router.navigate(['/dragon', { queryParams: "dragon ajouté" }])
+      res => {
+        console.log(res);
+        this.router.navigate(['/dragons', { queryParams: "Dragon ajouté avec succès" }])
       },
       error => {
         console.log(error);

@@ -11,12 +11,11 @@ export class DragonsComponent implements OnInit {
   dragons: Dragon[] = [];
 
   constructor(private dS: DragonsService) {
-
   }
 
   ngOnInit(): void {
     console.log("dragons work !")
-    this.dS.getDragon().subscribe(dragons => this.dragons = dragons)
+    this.dS.getDragon().subscribe(dragons => {this.dragons = dragons})
 
   }
 

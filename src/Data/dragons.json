@@ -1,14 +1,16 @@
 {
-  "dragons": [
-    {
-      "name": "Apalala"
+  "dragons": {
+    "dragon1": {
+      "name": "Apalala",
+      "id" : "dragon1"
     },
-
-    {
-      "name": "Balaur"
+    "dragon2": {
+      "name": "Balaur",
+      "id" : "dragon2"
     },
-    {
-      "name": "Bolla"
+    "dragon3": {
+      "name": "Bolla",
+      "id" : "dragon3"
     }
-  ]
+  }
 }

@@ -32,4 +32,8 @@ export class DragonsService {
     )
   }
 
+  addDragon(dragon: Dragon): Observable<any>{
+    return this.http.post<Dragon>(`${this.dragonUrl}/.json`, dragon)
+  }
+
 }

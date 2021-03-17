@@ -13,6 +13,9 @@ import { DragonsComponent } from './dragons/dragons.component';
 import { environment as env } from "../environments/environment"
 
 import firebase from 'firebase';
+import { UpdateDragonComponent } from './update-dragon/update-dragon.component';
+import { DeleteDragonComponent } from './delete-dragon/delete-dragon.component';
+import { DragonDetailsComponent } from './dragon-details/dragon-details.component';
 
 
 firebase.initializeApp(env.firebaseConfig);
@@ -22,6 +25,9 @@ firebase.initializeApp(env.firebaseConfig);
     AppComponent,
     AddDragonComponent,
     DragonsComponent,
+    UpdateDragonComponent,
+    DeleteDragonComponent,
+    DragonDetailsComponent,
 
   ],
   imports: [

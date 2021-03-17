@@ -4,17 +4,37 @@
   </button>
 </p>
 
-<table class="table table-hover table-dark" >
+<table class="table table-hover table-dark">
   <thead>
     <tr>
-      <th scope="col" style="text-align: center">Name</th>
+      <th>#</th>
+      <th scope="col">Name</th>
+      <th></th>
     </tr>
   </thead>
-  <tbody>
 
-    <tr scope="row" *ngFor="let dragon of dragons">
+  <tbody>
+    <tr *ngFor="let dragon of dragons">
+      <td>
+        /update/dragon/{{ dragon.id }}
+        <a routerLink="/update/dragon/{{ dragon.id }}"> test </a>
+        <button
+          class="btn btn-danger"
+          routerLink="/update/dragon/{{ dragon.id }}"
+        >
+          Update
+        </button>
+      </td>
       <td>
         {{ dragon.name }}
+      </td>
+      <td>
+        <button
+          class="btn btn-light"
+          routerLink="/delete/dragon/{{ dragon.id }}"
+        >
+          Delete
+        </button>
       </td>
     </tr>
   </tbody>

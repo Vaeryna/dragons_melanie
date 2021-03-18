@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Dragon } from 'src/Data/dragons';
-import { DRAGONS } from 'src/Data/mock-dragon';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 
@@ -27,7 +26,7 @@ export class DragonsService {
   getDragon(): Observable<Dragon[]> {
     return this.http.get<Dragon[]>(this.dragonUrl + "/.json").pipe(
       map(dragons => Object.values(dragons)),
-      map(a => { console.log("dragons:", a); return a })
+      map(a => { return a })
     )
   }
 
@@ -35,7 +34,7 @@ export class DragonsService {
     //   return this.http.get<Dragon>(`${this.dragonUrl}/${id}/.json`)
 
     return this.http.get<Dragon>(`${this.dragonUrl}/${id}/.json`).pipe(
-      map(a => { console.log("getOnedragons:", a); return a })
+      map(a => { return a })
     )
 
   }
@@ -44,7 +43,6 @@ export class DragonsService {
     return this.http.post<Dragon>(`${this.dragonUrl}/.json`, dragon).pipe(
       switchMap(ref => {
         dragon.id = ref.name;
-        console.log("ref.name : ", ref)
         return this.http.put<void>(`${this.dragonUrl}/${ref.name}/.json`, dragon)
       })
     )
@@ -57,6 +55,7 @@ export class DragonsService {
   }
 
   deleteDragon(id: string): Observable<any> {
+    console.log("delete id", id)
     return this.http.delete<any>(`${this.dragonUrl}/${id}/.json`)
 
 

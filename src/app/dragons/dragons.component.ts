@@ -14,8 +14,7 @@ export class DragonsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("dragons work !")
-    this.dS.getDragon().subscribe(dragons => {this.dragons = dragons})
+    this.dS.getDragon().subscribe(dragons => { this.dragons = dragons })
 
   }
 

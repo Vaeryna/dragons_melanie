@@ -27,7 +27,6 @@ export class AddDragonComponent implements OnInit {
   get name() { return this.dragonForm.get('name'); }
 
   onSubmit() {
-    console.log("it work! ")
     const dragon = this.dragonForm.value;
 
     this.dS.addDragon(dragon).subscribe(

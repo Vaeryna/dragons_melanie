@@ -24,7 +24,7 @@ export class DeleteDragonComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id)
       this.dS.getOneDragon(id)
-        .subscribe((dragon) => { this.dragon = dragon; console.log("dragon: ,", dragon) });
+        .subscribe((dragon) => { this.dragon = dragon; this.dragonForm.patchValue(dragon) });
 
   }
 
@@ -33,7 +33,7 @@ export class DeleteDragonComponent implements OnInit {
       {
         name: new FormControl("",
           Validators.required, // pour définir dans le controle un champ requis
-        ), id :""
+        ), id: ''
       })
 
   }
@@ -44,8 +44,8 @@ export class DeleteDragonComponent implements OnInit {
   onSubmit() {
     console.log("delete")
     const dragon = this.dragonForm.value;
-
-    this.dS.deleteDragon(dragon).subscribe(() => {
+    console.log("dragon delete", dragon)
+    this.dS.deleteDragon(dragon.id).subscribe(() => {
       this.router.navigate(['/dragons'])
     },
       error => console.log(error))

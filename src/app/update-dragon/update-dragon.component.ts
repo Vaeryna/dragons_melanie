@@ -21,6 +21,7 @@ export class UpdateDragonComponent implements OnInit {
   constructor(private dS: DragonsService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
     this.initForm();
     const id = this.route.snapshot.paramMap.get('id');
     if (id)
@@ -45,7 +46,6 @@ export class UpdateDragonComponent implements OnInit {
     console.log("update")
 
     const dragon = this.dragonForm.value;
-    console.log("dragon submit", dragon)
 
     this.dS.updateDragon(dragon).subscribe(dragon => {
       this.router.navigate(['/dragons', { queryParams: { message: `${dragon.name} a bien été mis à jour` } }]);

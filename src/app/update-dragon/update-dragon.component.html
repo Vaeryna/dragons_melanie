@@ -1,6 +1,7 @@
 <form [formGroup]="dragonForm" (ngSubmit)="onSubmit()">
-  <div class="form-group p-2">
+  <div class="form-group p-2" id="${id}">Old name : {{ dragon.name }}</div>
 
+  <div class="form-group p-2">
     <label for="name"> New name :</label>
     <input
       name="name"
@@ -23,7 +24,7 @@
       type="submit"
       class="btn btn-primary m-2"
     >
-      Add
+      Change
     </button>
 
     <button routerLink="/dragons" class="btn btn-light">Return</button>

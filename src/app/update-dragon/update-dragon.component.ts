@@ -15,21 +15,17 @@ import { Dragon } from 'src/Data/dragons';
 export class UpdateDragonComponent implements OnInit {
   dragonForm: FormGroup
   loadData: boolean = false
+  dragon: Dragon
 
 
   constructor(private dS: DragonsService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.initForm();
-
- /*    this.route.params
-      .subscribe(params => {
-        this.loadData = true;
-    const dragon=    this.dS.getOneDragon(params.id)
-        this.dragonForm.patchValue(dragon); // hydrate le formulaire
-        console.log("id dragon init: ", dragon);
-      }
-      ) */
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id)
+      this.dS.getOneDragon(id)
+        .subscribe((dragon) => { this.dragon = dragon; this.dragonForm.patchValue(dragon) });
   }
 
   initForm() {
@@ -38,19 +34,22 @@ export class UpdateDragonComponent implements OnInit {
         name: new FormControl("",
           Validators.required, // pour définir dans le controle un champ requis
         ),
+        id: ''
       })
   }
 
-  get name() { return this.dragonForm.get('name'); }
+  get name() { return this.dragonForm.get('name') };
+  get id() { return this.dragonForm.get('id'); }
 
 
   onSubmit() {
     console.log("update")
+
     const dragon = this.dragonForm.value;
-    console.log('id dragon: ', dragon.id)
+    console.log("dragon submit", dragon)
 
     this.dS.updateDragon(dragon).subscribe(dragon => {
-      this.router.navigate(['/dragons', { queryParams: { message: `${dragon.name} a bien été mis à jour` } }])
+      this.router.navigate(['/dragons', { queryParams: { message: `${dragon.name} a bien été mis à jour` } }]);
     },
       error => console.log(error))
 

@@ -16,8 +16,9 @@
   <tbody>
     <tr *ngFor="let dragon of dragons">
       <td>
-        /update/dragon/{{ dragon.id }}
-        <a routerLink="/update/dragon/{{ dragon.id }}"> test </a>
+
+        {{ dragon.id }}
+
         <button
           class="btn btn-danger"
           routerLink="/update/dragon/{{ dragon.id }}"
@@ -25,7 +26,7 @@
           Update
         </button>
       </td>
-      <td routerLink="dragons/{{dragon.id}}">
+      <td routerLink="{{dragon.id}}">
         {{ dragon.name }}
       </td>
       <td>

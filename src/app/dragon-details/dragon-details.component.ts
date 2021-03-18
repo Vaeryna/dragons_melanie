@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Dragon } from 'src/Data/dragons';
 import { DragonsService } from '../dragons.service';
+import { map, switchMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-dragon-details',
@@ -16,10 +18,9 @@ export class DragonDetailsComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     console.log(id, 'id');
 
-
     if (id)
-      this.dS.getOneDragon(id).subscribe(a => {
-        this.dragon = a; console.log('http', a);
-      });
-  }
+      this.dS.getOneDragon(id)
+        .subscribe((dragon) => { this.dragon = dragon; console.log("dragon: , ", dragon) });
+  };
 }
+

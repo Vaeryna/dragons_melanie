@@ -3,6 +3,9 @@
     Add a dragon
   </button>
 </p>
+<p [@openClosed]="isOpen ? 'open' : 'closed'" class="alert alert-success">
+  {{ message }}
+</p>
 
 <table class="table table-hover table-dark">
   <thead>
@@ -10,15 +13,13 @@
       <th></th>
       <th scope="col">Name</th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <tr *ngFor="let dragon of dragons">
       <td>
-
-
-
         <button
           class="btn btn-danger"
           routerLink="/update/dragon/{{ dragon.id }}"
@@ -26,7 +27,7 @@
           Update
         </button>
       </td>
-      <td routerLink="{{dragon.id}}">
+      <td routerLink="{{ dragon.id }}">
         {{ dragon.name }}
       </td>
       <td>
@@ -37,6 +38,52 @@
           Delete
         </button>
       </td>
+
+      <td>
+        <button
+          data-bs-toggle="modal"
+          data-bs-target="#modalDelete"
+          class="btn btn-danger"
+          (click)="onDelete(dragon.id)"
+        >
+          Delete Pop-up
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
+
+<ng-template #elseBlock>No dragon </ng-template>
+<div
+  class="modal fade"
+  id="modalDelete"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modalDeleteLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDeleteLabel">Delete</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">Voulez-vous vraiment supprimer ce dragon ?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          No
+        </button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()">
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

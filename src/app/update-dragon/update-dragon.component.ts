@@ -39,7 +39,6 @@ export class UpdateDragonComponent implements OnInit {
   }
 
   get name() { return this.dragonForm.get('name') };
-  get id() { return this.dragonForm.get('id'); }
 
 
   onSubmit() {

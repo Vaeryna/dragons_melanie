@@ -52,28 +52,14 @@ export class DragonsService {
   }
 
   updateDragon(dragon: Dragon): Observable<any> {
-    return this.http.put<Dragon>(`${this.dragonUrl}/${dragon.id}/.json`, dragon).pipe(
-      switchMap(() => { 
-        console.log("dragon service: ", dragon)
-        console.log("id service", dragon.id)
-        /* switchMap(ref => {
-          dragon.id = dragon.name;
-          console.log("ref.name : ", ref);
-          console.log('dragon.id', dragon.id) */
-        return this.http.put<void>(`${this.dragonUrl}/${dragon.id}/.json`, dragon)
-      })
-    )
+    return this.http.put<Dragon>(`${this.dragonUrl}/${dragon.id}/.json`, dragon)
+
   }
 
-  deleteDragon(dragon: Dragon): Observable<any> {
-    return this.http.delete<Dragon>(`${this.dragonUrl}/${dragon.id}/.json`).pipe(
-      switchMap(ref => {
-        dragon.id = ref.name;
-        console.log("ref.name : ", ref);
-        console.log('dragon.id', dragon.id)
-        return this.http.put<void>(`${this.dragonUrl}/${ref.name}/.json`, dragon)
-      })
-    )
+  deleteDragon(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.dragonUrl}/${id}/.json`)
+
+
   }
 
 

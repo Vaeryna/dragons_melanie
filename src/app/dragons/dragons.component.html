@@ -1,3 +1,4 @@
+<app-paginate (setPaginate)="paginateParent($event)"> </app-paginate>
 <p>
   <button routerLink="/addDragon" class="btn btn-secondary">
     Add a dragon
@@ -12,7 +13,7 @@
     <tr>
       <th></th>
       <th scope="col">Name</th>
-      <th></th>
+      <th>Knight</th>
       <th></th>
     </tr>
   </thead>
@@ -29,7 +30,7 @@
       </td>
       <td routerLink="{{ dragon.id }}">
         {{ dragon.name }}
-      </td>
+        <!--   </td>
       <td>
         <button
           class="btn btn-light"
@@ -37,7 +38,10 @@
         >
           Delete
         </button>
+      </td> -->
       </td>
+
+      <td routerLink="{{ knight.id }}">chevalier {{ dragon.knight }}</td>
 
       <td>
         <button

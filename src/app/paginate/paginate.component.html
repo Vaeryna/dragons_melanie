@@ -1,0 +1,15 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [ngClass]="{'disabled' : currentPage==1}">
+      <a class="page-link"  tabindex="-1" (click)="previous()">Previous</a>
+    </li>
+    <!-- .directive pour afficher les numéros de page  -->
+    <li class="page-item" *ngFor="let page of pages">
+      <a class="page-link" [class.active]="currentPage==page" (click)="select(page)" >{{page}}</a>
+    </li>
+    <!-- next permet d'avancer -->
+    <li class="page-item" [ngClass]="{'disabled' : currentPage==numberPages}">
+      <a class="page-link" (click)="next()" >Next</a>
+    </li>
+  </ul>
+</nav><!-- .pagination -->

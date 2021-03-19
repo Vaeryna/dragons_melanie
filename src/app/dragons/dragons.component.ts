@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DragonsService } from '../dragons.service';
 import { Dragon } from "../../Data/dragons"
+import { environment as env } from "../../environments/environment"
 
 import {
   trigger,
@@ -42,7 +43,9 @@ export class DragonsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dS.getDragon().subscribe(dragons => { this.dragons = dragons })
+    //  this.dS.getDragon().subscribe(dragons => { this.dragons = dragons })
+    this.dS.paginate(0, env.nb_dragon).subscribe(dragons => this.dragons = dragons)
+
     this.route.queryParams
       .subscribe((params: any) => {
         if (params.message) {
@@ -51,6 +54,7 @@ export class DragonsComponent implements OnInit {
           setTimeout(() => this.isOpen = false, 1000);
         }
       });
+
 
   }
 
@@ -73,4 +77,20 @@ export class DragonsComponent implements OnInit {
       });
     }
   }
+
+  paginateParent($event: { start: number, end: number }): void {
+    const { start, end } = $event;
+
+    this.dS.paginate(start, end).subscribe(dragons => this.dragons = dragons);
+  }
+
+  start() {
+    this.dS.counter.next(true);
+  }
+
+  stop() {
+    this.dS.counter.next(false);
+  }
+
 }
+

@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  nb_dragon: 3,
   firebaseConfig: {
     apiKey: "AIzaSyDQrxLfGPjlxOH7mywmMRt_PMP_uJEupf8",
     authDomain: "knight-dragons.firebaseapp.com",

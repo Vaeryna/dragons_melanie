@@ -22,6 +22,10 @@ export class DragonsService {
   constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   private dragonUrl = "https://knight-dragons-default-rtdb.firebaseio.com/dragons";
+  private countUrl = "https://knight-dragons-default-rtdb.firebaseio.com/count";
+
+  counter: Subject<boolean> = new Subject<boolean>();
+
 
   getDragon(): Observable<Dragon[]> {
     return this.http.get<Dragon[]>(this.dragonUrl + "/.json").pipe(
@@ -43,7 +47,9 @@ export class DragonsService {
     return this.http.post<Dragon>(`${this.dragonUrl}/.json`, dragon).pipe(
       switchMap(ref => {
         dragon.id = ref.name;
-        return this.http.put<void>(`${this.dragonUrl}/${ref.name}/.json`, dragon)
+        return this.http.put<void>(`${this.dragonUrl}/${ref.name}/.json`, dragon).pipe(
+          switchMap(ref => this.incrementCount())
+        )
       })
     )
 
@@ -56,10 +62,36 @@ export class DragonsService {
 
   deleteDragon(id: string): Observable<any> {
     console.log("delete id", id)
-    return this.http.delete<any>(`${this.dragonUrl}/${id}/.json`)
+    return this.http.delete<any>(`${this.dragonUrl}/${id}/.json`).pipe(
+      switchMap(ref => this.decrementCount())
+    )
 
 
   }
 
+  paginate(start: number, end: number): Observable<Dragon[]> {
+    return this.http.get<Dragon[]>(this.dragonUrl + '/.json').pipe(
+      // Pour appliquer un pipe permettant de récupérer les données firebase dans un Array JS
+      map(dragons => Object.values(dragons)),
+      map(dragons => dragons
+        //     .sort((x, y) => x.duration - y.duration)  => rangement alphabetique à voir
+        .slice(start, end))
+    )
+  }
+
+  count(): Observable<number> {
+    return this.http.get<number>(this.countUrl + '/.json');
+
+  }
+  incrementCount(): Observable<any> {
+    return this.http.get<number>(`${this.countUrl}/.json`).pipe(
+      switchMap(count => this.http.put<void>(`${this.countUrl}/.json`, count + 1))
+    )
+  }
+  decrementCount(): Observable<any> {
+    return this.http.get<number>(`${this.countUrl}/.json`).pipe(
+      switchMap(count => this.http.put<void>(`${this.countUrl}/.json`, count - 1))
+    )
+  }
 
 }

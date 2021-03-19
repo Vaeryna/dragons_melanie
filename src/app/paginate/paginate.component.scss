@@ -1,0 +1,12 @@
+$color: #460000;
+nav {
+  a {
+    cursor: pointer;
+    color: rgb(0, 70, 70)
+    ;
+  }
+  a.active {
+    background-color: $color;
+    color: white !important;
+  }
+}

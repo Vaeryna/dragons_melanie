@@ -16,6 +16,7 @@ import firebase from 'firebase';
 import { UpdateDragonComponent } from './update-dragon/update-dragon.component';
 import { DeleteDragonComponent } from './delete-dragon/delete-dragon.component';
 import { DragonDetailsComponent } from './dragon-details/dragon-details.component';
+import { PaginateComponent } from './paginate/paginate.component';
 
 
 firebase.initializeApp(env.firebaseConfig);
@@ -28,6 +29,7 @@ firebase.initializeApp(env.firebaseConfig);
     UpdateDragonComponent,
     DeleteDragonComponent,
     DragonDetailsComponent,
+    PaginateComponent,
 
   ],
   imports: [

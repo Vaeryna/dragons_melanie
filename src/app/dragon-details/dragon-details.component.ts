@@ -5,7 +5,6 @@ import { DragonsService } from '../dragons.service';
 import { map, switchMap } from 'rxjs/operators';
 
 import { environment as env } from '../../environments/environment'
-import { from } from 'rxjs';
 
 @Component({
   selector: 'app-dragon-details',
@@ -22,7 +21,11 @@ export class DragonDetailsComponent implements OnInit {
 
     if (id)
       this.dS.getOneDragon(id)
-        .subscribe((dragon) => { this.dragon = dragon; console.log("dragon: , ", dragon) });
+        .subscribe((dragon) => { this.dragon = dragon; console.log("dragon: ", dragon) });
+
+
+
+
 
 
   };

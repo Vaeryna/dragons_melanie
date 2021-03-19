@@ -1,7 +1,8 @@
 <p>dragon-details works!</p>
 
 <div *ngIf="dragon">
-name : {{dragon.name}}
+  <p>name : {{ dragon.name }}</p>
+  <p *ngIf="element">element : {{ dragon.element }}</p>
 </div>
 
 <button routerLink="/dragons" class="btn btn-light">Return</button>

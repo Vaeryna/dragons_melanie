@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { map, switchMap } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Element } from 'src/Data/element';
 
 
 const httpOptions = {
@@ -19,10 +20,13 @@ const httpOptions = {
 })
 export class DragonsService {
 
+  elements: Element[];
+
   constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   private dragonUrl = "https://knight-dragons-default-rtdb.firebaseio.com/dragons";
   private countUrl = "https://knight-dragons-default-rtdb.firebaseio.com/count";
+  private elementUrl = "https://knight-dragons-default-rtdb.firebaseio.com/elements";
 
   counter: Subject<boolean> = new Subject<boolean>();
 
@@ -34,19 +38,38 @@ export class DragonsService {
     )
   }
 
-  getOneDragon(id: string): Observable<any> {
-    //   return this.http.get<Dragon>(`${this.dragonUrl}/${id}/.json`)
+  getElement(): Observable<Element[]> {
+    console.log("get element")
+    return this.http.get<Element[]>(this.elementUrl + "/.json").pipe(
+      map(elements => Object.values(elements)),
+      map(a => { console.log(a); return a })
+    )
+  };
 
-    return this.http.get<Dragon>(`${this.dragonUrl}/${id}/.json`).pipe(
+  getOneElement(id: string): Observable<any> {
+    return this.http.get<Element>(`${this.elementUrl}/ ${id} /.json}`).pipe(
+      map(a => { return a })
+    )
+  }
+
+  getOneDragon(id: string): Observable<any> {
+    //   return this.http.get<Dragon>(`${ this.dragonUrl } /${id}/.json`)
+
+    return this.http.get<Dragon>(`${this.dragonUrl} /${id}/.json`).pipe(
       map(a => { return a })
     )
 
   }
 
   addDragon(dragon: Dragon): Observable<any> {
-    return this.http.post<Dragon>(`${this.dragonUrl}/.json`, dragon).pipe(
+    return this.http.post<Dragon>(`${this.dragonUrl} /.json`, dragon).pipe(
       switchMap(ref => {
-        dragon.id = ref.name;
+        dragon.id = ref.name
+          ; console.log("ref:", ref)
+        /*    if (element) {
+          //   dragon.element = element
+             console.log("element dargon", element) */
+
         return this.http.put<void>(`${this.dragonUrl}/${ref.name}/.json`, dragon).pipe(
           switchMap(ref => this.incrementCount())
         )

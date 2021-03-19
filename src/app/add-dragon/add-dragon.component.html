@@ -14,8 +14,30 @@
     <div *ngIf="name?.invalid && name?.touched" class="alert alert-danger">
       <div *ngIf="name?.errors?.required">Name is required</div>
     </div>
+  </div>
 
- 
+  <div
+   class="btn-group"
+    role="group"
+    aria-label="Basic radio toggle button group"
+    *ngFor="let element of elements"
+  >
+    <input
+      type="radio"
+      class="btn-check"
+      formControlName="element"
+      id="{{element.name}}"
+      autocomplete="off"
+      value="{{ element.name }}"
+
+    />
+    <label
+      class="btn btn-outline-secondary m-1"
+      for="{{element.name}}"
+    >
+      {{ element.name }}</label
+    >
+  </div>
 
   <div class="form-group col-md-12 m-2">
     <button

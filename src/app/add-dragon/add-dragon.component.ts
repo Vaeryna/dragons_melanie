@@ -46,7 +46,7 @@ export class AddDragonComponent implements OnInit {
     console.log("dragon submit", dragon)
 
 
-    /* this.dS.addDragon(dragon).subscribe(
+     this.dS.addDragon(dragon).subscribe(
       res => {
         console.log(res);
         this.router.navigate(['/dragons', { queryParams: "Dragon ajouté avec succès" }])
@@ -56,7 +56,7 @@ export class AddDragonComponent implements OnInit {
       },
       () => console.log('Completé"')
     )
-  } */
+
 
   }
 }
